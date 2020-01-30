@@ -1,0 +1,14 @@
+{
+  "name": "shoppinglist",
+  "version": "1.0.0",
+  "description": "shiping list desktop app",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Ahmarul abdi",
+  "license": "MIT",
+  "dependencies": {
+    "electron": "^7.1.11"
+  }
+}
