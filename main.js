@@ -1,16 +1,16 @@
-const electron = require("electron");
-const url = require("url");
-const path = require("path");
+const electron = require("electron")
+const url = require("url")
+const path = require("path")
 
-const { app, BrowserWindow, Menu } = require("electron");
+const { app, BrowserWindow, Menu } = require("electron")
 
-let mainWIndow;
-let addWindow;
+let mainWIndow
+let addWindow
 
 // Listen for app to be ready
 app.on("ready", function() {
   // Create new Window
-  mainWIndow = new BrowserWindow({});
+  mainWIndow = new BrowserWindow({})
 
   // Load html into wndow
   mainWIndow.loadURL(
@@ -19,23 +19,21 @@ app.on("ready", function() {
       protocol: "file:",
       slashes: true
     })
-  );
+  )
 
   // Quit App when closed
-  mainWIndow.on('closed',() => {
-      app.quit()
-  })
+  mainWIndow.on("closed", () => app.quit())
   // Build Menu from template
-  const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
-  Menu.setApplicationMenu(mainMenu);
-});
+  const mainMenu = Menu.buildFromTemplate(mainMenuTemplate)
+  Menu.setApplicationMenu(mainMenu)
+})
 
 function createAddWindow() {
   addWindow = new BrowserWindow({
     width: 300,
     height: 200,
     title: "Add Shopping List Item"
-  });
+  })
 
   addWindow.loadURL(
     url.format({
@@ -43,7 +41,10 @@ function createAddWindow() {
       protocol: "file:",
       slashes: true
     })
-  );
+  )
+
+  //   Garbage collection handle
+  addWindow.on("close", () => (addWindow = null))
 }
 
 // Create menu template
@@ -55,7 +56,7 @@ const mainMenuTemplate = [
       {
         label: "Add Item",
         click() {
-          createAddWindow();
+          createAddWindow()
         }
       },
       {
@@ -65,9 +66,14 @@ const mainMenuTemplate = [
         label: "Quit",
         accelerator: process.platform == "darwin" ? "Command+Q" : "Ctrl+Q",
         click() {
-          app.quit();
+          app.quit()
         }
       }
     ]
   }
-];
+]
+
+// If matchMedia, add empty object to menu
+if (process.platform == "darwin") {
+    mainMenuTemplate.unshift({})
+}
