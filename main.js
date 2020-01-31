@@ -4,7 +4,8 @@ const path = require('path')
 
 const { app, BrowserWindow, Menu} = require('electron')
 
-let mainWIndow;
+let mainWIndow
+let addWindow
 
 // Listen for app to be ready
 app.on('ready', function(){
@@ -23,6 +24,20 @@ app.on('ready', function(){
     Menu.setApplicationMenu(mainMenu)
 });
 
+createAddWindow() {
+    addWindow = new BrowserWindow({
+        width: 300,
+        height: 200,
+        title: "Add Shopping List Item"
+    })
+
+    addWindow.loadURL(url.format({
+        pathname: path.join(__dirname, 'addWindow.html'),
+        protocol: 'file:',
+        slashes: true
+    }))
+}
+
 // Create menu template
 
 const mainMenuTemplate = [
@@ -30,11 +45,14 @@ const mainMenuTemplate = [
         label: 'File',
         submenu: [
             {
-                label: 'Add Item'
+                label: 'Add Item',
+                 click() {
+                     createAddWindow()
+                 }
             },
             {
                 label: 'Clear Items'
-            },
+            }, 
             {
                 label: 'Quit',
                 accelerator: process.platform == 'darwin' ? 'Command+Q' : 'Ctrl+Q',
