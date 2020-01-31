@@ -75,5 +75,5 @@ const mainMenuTemplate = [
 
 // If matchMedia, add empty object to menu
 if (process.platform == "darwin") {
-    mainMenuTemplate.unshift({})
+  mainMenuTemplate.unshift({})
 }
