@@ -90,6 +90,9 @@ if (process.env.NODE_ENV !== "production") {
         click(item, focusedWindow) {
           focusedWindow.toggleDevTools();
         }
+      },
+      {
+        role: 'reload'
       }
     ]
   });
