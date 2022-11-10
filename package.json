@@ -9,6 +9,6 @@
   "author": "Ahmarul abdi",
   "license": "MIT",
   "dependencies": {
-    "electron": "^7.1.11"
+    "electron": "^18.3.7"
   }
 }
